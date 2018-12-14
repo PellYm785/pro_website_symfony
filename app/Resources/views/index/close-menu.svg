@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="15" height="15" version="1.1" id="close-menu" xmlns="http://www.w3.org/2000/svg">
+    <g
+            id="g1332"
+            style="fill:#000000;fill-opacity:1;stroke:none"
+            transform="matrix(0.260054,0,0,0.260054,1.040286,10.10348)" />
+    <path
+            style="fill:#FFFFFF;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+            d="
+            M 11.374823,1.1413564
+            L 13.849862,3.6163952
+            L 9.9605151,7.5057412
+            L 13.849862,11.395089
+            L 11.374823,13.870128
+            L 7.4854771,9.9807801
+            L 3.5961301,13.870128
+            L 1.1210911,11.395089
+            L 5.0104381,7.5057412
+            L 1.1210911,3.6163952
+            L 3.5961301,1.1413564
+            L 7.4854761,5.0307032
+            L 11.374823,1.1413564 z "
+            id="path2224"
+    />
+</svg>

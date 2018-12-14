@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lettre>
+		<nom>NGBAMA William</nom>
+		<adresse>5 cité de l'hypogée</adresse>
+		<ville>86000 Poitiers</ville>
+		<contact>0651199224 / william.ngbama@gmail.com</contact>
+		<date>Poitiers, le 18 mars 2018</date>
+		<sujet>Objet : Recherche de stage du 22 mai au 22 juin</sujet>
+		<debutCorps>Madame, Monsieur,</debutCorps>
+	
+		<introduction>
+		Actuellement en BTS SIO au lycée Aliénor d’Aquitaine à Poitiers, je
+		viens solliciter un stage dans votre entreprise afin de découvrir les métiers
+		de l'informatique.
+		</introduction>
+	
+		<corpsPrincipal>
+		En effet, ce stage s'inscrit parfaitement dans mon projet
+		professionnel. Passionné par l'informatique, j'aspire à 
+		approfondir mes connaissances en programmation dans l'optique de
+		pouvoir, un jour, occuper le poste de développeur informatique.
+		Intéressé et performant dans les matières scientifiques, j'ai pu
+		développer des capacités d'analyse, de réflexion et de
+		compréhension. Déterminé, je cherche toujours à mener à terme mes
+		tâches, un esprit que je tire de la pratique de l'athlétisme
+		qui me pousse à ne pas renoncer devant une difficulté pour
+		atteindre mes objectifs.
+		</corpsPrincipal>
+	
+		<fin>
+		J'espère que ma demande retiendra votre attention particulière
+		et je reste à votre disposition pour un éventuel entretien.
+		</fin>
+
+		<politesse>
+		Je vous prie de croire, Monsieur, Madame, en l'expression de mes
+		salutations les plus respectueuses.
+		</politesse>
+
+</lettre>

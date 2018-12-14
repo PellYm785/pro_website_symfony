@@ -1,0 +1,82 @@
+{% set mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin","Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"] %}
+
+
+<section id="CV" class="hide">
+
+	<div id="Competences" class="section-cv active">
+		<h3 class="titre_comp"><div>Comp&eacute;tences</div></h3>
+		<ul id="listeComp">
+
+
+			{% for categorie in cv.typeComp  %}
+				<li class="categorie"> {{ categorie.type }} </li>
+
+				{% for competences in cv.competences|cast_to_array %}
+					{% if competences[1][0].type == categorie.type %}
+						{% for competence in competences[1] %}
+							<li class="Competence"> {{ competence.nom }} </li>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div id="Experiences" class="section-cv">
+		<h3 class="titre_comp"><div>Experiences</div></h3>
+		<ul id="listeExp">
+			{% for experience in cv.experiences  %}
+				<li class="Experience">
+					<p class="poste">{{ experience.type }} {{ experience.poste }}</p>
+					<p>{{ experience.organisation }}</p>
+					<p class="date">
+						{% set duree = "" %}
+
+
+						{% set duree = duree ~ 'Du ' ~ experience.debut['day']~' '~mois[experience.debut['month']-1]~' '~experience.debut['year']~' au ' %}
+						{% set duree = duree~experience.fin['day']~' '~mois[experience.fin['month']-1]~' '~experience.fin['year'] %}
+
+						{{ duree }}
+
+
+
+					</p>
+				</li>
+
+			{% endfor  %}
+
+		</ul>
+	</div>
+
+	<div id="Formations" class="section-cv">
+		<h3 class="titre_comp"><div>Formations</div></h3>
+		<ul id="listeForm">
+
+			{% for formation in cv.formations %}
+				<li class="Formation">
+					<p class="diplome"> {{ formation.nom }} </p>
+					<p> {{ formation.etablissement }} </p>
+					<p class="date">
+
+						{% set duree = "" %}
+						{% if formation.fin == '0000-00-00' %}
+							{% set duree = duree~'Depuis '~mois[formation.debut['month']-1]~' '~formation.debut['year'] %}
+						{% else %}
+							{% set duree = duree~'De '~mois[formation.debut['month']-1]~' '~formation.debut['year']~' à '  %}
+							{% set duree = duree~mois[formation.fin['month']-1]~' '~formation.fin['year']  %}
+						{% endif %}
+
+						{{ duree }}
+
+					</p>
+
+					{% if formation.commentaire != "" %}
+						<p id="commentaire"> {{ formation.commentaire }} </p>
+					{% endif %}
+				</li>
+			{% endfor %}
+
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,324 @@
+/* Ordi Plein-écran*/
+@media screen and (min-width: 1080px) {
+
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    /* -- en-tête*/
+    header {
+        text-align: center;
+        font-family: Trebuchet MS;
+        color: white;
+        background: linear-gradient(135deg, rgba(134, 255, 148, 0.5) 0%, rgba(0,0,0,0.5) 74%);
+        margin: auto;
+        display: flex;
+        height: 50%;
+    }
+
+    video{
+        position: absolute;
+        z-index: -100;
+        top: 0;
+        left: 0;
+    }
+
+    h1{
+        margin: auto;
+    }
+
+    /* -- menu */
+
+
+    nav {
+        position: fixed;
+        display: flex;
+        background: #1b1b1b;
+        height: 5%;
+        width: 100%;
+        left: 0px;
+        top: 0px;
+    }
+
+
+    #container-icon-menu {
+        display: flex;
+        margin-right: 2px;
+        color: #838383;
+        width: 5%;
+	}
+
+    #container-icon-menu *{
+        margin-top: auto;
+        margin-bottom: auto;
+        font-family: Arial;
+        margin-right: 10%;
+    }
+
+    #menu {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        height: 100em;
+        padding-left: 50px;
+        padding-right: 50px;
+        background-color: #111111;
+    }
+
+    #close-menu{
+        position: fixed;
+        top: 15px;
+        right: 15px;
+    }
+
+    nav ul {
+        margin-top: 40px;
+    }
+
+    nav li {
+        color: white;
+        display: flex;
+        font-family: Arial;
+        /*font-weight: bold;*/
+        height: 40px;
+        list-style: none;
+        border-bottom: rgba(255,255,255,0.25) solid 1px;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    nav li:last-of-type{
+        border-bottom: 0;
+    }
+
+    nav li div {
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+    .selected {
+        color: #58d9ff;
+    }
+    nav div {
+        margin: auto;
+    }
+    .hide {
+        display: none !important;
+    }
+
+    #background-content{
+        position: absolute;
+        background: url(../image/fondLM.png) no-repeat center fixed;
+        -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+        background-size: cover; /* version standardis�e */
+        z-index: -100;
+        padding: 5px;
+    }
+
+    #content{
+        background: rgba(255,255,255,0.9);
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    /* -- Lettre de motivation */
+    #LM article {
+        margin: auto;
+        margin-top: 2.5%;
+        margin-bottom: 2.5%;
+        overflow: auto;
+        width: 31%;
+        background: rgba(255, 255, 255,0.9);
+        font-family: Trebuchet MS;
+        text-align: justify;
+        padding: 2%;
+        padding-bottom: 1%;
+
+    }
+    #date {
+        margin-right: 5%;
+        margin-bottom: 8%;
+        text-align: right;
+    }
+    #debutCorps {
+        margin-top: 5%;
+    }
+    #corps {
+        margin-top: 5%;
+    }
+    #pied {
+        margin-top: 10%;
+        margin-right: 5%;
+        text-align: right;
+    }
+    .sans_espace {
+        margin: 0px;
+    }
+    .sans_espace_top {
+        margin-top: 0px;
+    }
+
+    /* -- CV  ----------------------------*/
+    #CV {
+        width: 75%;
+        height: 35em;
+        margin: auto;
+        background-size: 9%;
+        display: flex;
+    }
+    .titre_comp {
+        display: flex;
+        background: black;
+        color: white;
+        font-family: Arial;
+        height: 25%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .titre_comp div {
+        margin: auto;
+    }
+
+    #CV ul {
+        max-height: 75%;
+        background: rgba(255, 255, 255, 0.86);
+        margin-top: 0px;
+        margin-bottom: 0px;
+        overflow: auto;
+    }
+ 	.section-cv {
+		width: 30%;
+        height: 100%;
+        margin-left: 5%;
+        margin-right: 5%;
+	}
+
+    .Competence {
+        font-family: Arial;
+        font-weight: 700;
+        list-style: none;
+        margin-bottom: 5%;
+        margin-left: 10%;
+    }
+    .categorie {
+        text-decoration: underline;
+        font-family: Arial;
+        font-weight: bold;
+        list-style: none;
+        margin-bottom: 10%;
+        margin-top: 10%;
+    }
+    .Formation, .Experience {
+        font-family: Arial;
+        font-weight: bold;
+        list-style: none;
+        margin-bottom: 20%;
+    }
+    .Formation:last-child, .Experience:last-child {
+        margin-bottom: 0;
+    }
+    .commentaire {
+        font-style: italic;
+        font-weight: 800;
+    }
+    .diplome, .poste {
+        text-decoration: underline;
+    }
+    .date {
+        font-weight: normal;
+    }
+
+    #Contact{
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        width: 30%;
+        height: 50%;
+        margin: auto;
+        border-radius: 20px;
+        border: #cfd0c3 solid 1px;
+    }
+
+
+
+    #Contact *{
+        width: 90%;
+        margin: auto;
+    }
+
+    #Contact label{
+        background-color: black;
+        color: white;
+        font-family: Arial;
+        padding: 10px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        width: 100%;
+    }
+
+    #Contact label p{
+        width: 90%;
+    }
+
+    #emailContact{
+        border: 0;
+    }
+
+    #objet{
+        border-width: 1px;
+        border-left: 0;
+        border-right: 0;
+        border-top-color: #000;
+        border-bottom-color: #000 ;
+    }
+
+    #Contact input{
+        padding: 8px;
+    }
+
+    #sendButton{
+        width: 15%;
+        padding: 8px;
+        background-color: #0072c2;
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        margin-right: 0px;
+    }
+
+    #message{
+        height: 500px;
+        background-color: white;
+        font-family: Arial;
+    }
+
+    footer {
+        clear: left;
+        height: 2em;
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+    }
+    footer ul {
+        display: flex;
+        width: 50%;
+        margin: auto;
+    }
+    footer li {
+        display: flex;
+        height: 2em;
+        width: 20%;
+        border-radius: 19px;
+        font-family: Arial;
+        color: white;
+        padding-left: 1%;
+        padding-right: 1%;
+        background: rgba(205, 205, 205, 0.6);
+        box-shadow: 1px 1px 12px #a8ffbb;
+        margin-left: 4.8%;
+    }
+    footer li div {
+        margin: auto;
+    }
+    #Email {
+        width: 31%;
+    }
+}

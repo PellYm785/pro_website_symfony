@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Présentation</title>
+    <link rel="stylesheet" href="{{ asset('css/1920x1080.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/fenetre.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/smartphone.css') }}" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/pluginPageEffect.js') }}"></script>
+    <script src="{{ asset('js/moduleRI/Item.js') }}"></script>
+    <script src="{{ asset('js/moduleRI/Category.js') }}"></script>
+    <script src="{{ asset('js/moduleRI/Section.js') }}"></script>
+    <script src="{{ asset('js/moduleRI/RI.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $("body").css({ height: $(window).height()*0.85});
+        });
+    </script>
+</head>
+<body>
+<header>
+    <video autoplay loop>
+        <source src="{{ asset('video/video-background.mp4') }}" type="video/mp4">
+    </video>
+    <h1>
+        PRESENTATION NGBAMA William
+    </h1>
+</header>
+<nav>
+    <div id="container-icon-menu">
+        {{ source('index/icon-menu.svg') }}
+
+        <span>
+            Menu
+        </span>
+    </div>
+
+    <div id="menu">
+        {{ source('index/close-menu.svg') }}
+        <ul>
+            <li id="LM_in" class="selected" data-link="LM">
+                <div>
+                    Lettre de motivation
+                </div>
+            </li>
+            <li id="CV_in" data-link="CV">
+                <div>
+                    Curriculum Vitae
+                </div>
+            </li>
+            <li id="Contact_in" data-link="Contact">
+                <div>
+                    Contact
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div id="background-content"></div>
+<div id="content">
+    {% include 'index/lm.html.twig' with {'xml': lm} %}
+    {% include 'index/cv.html.twig' %}
+    {% include 'index/contact.html.twig' %}
+</div>
+<footer>
+    <ul>
+        <li class="footer" id="Email">
+            <div>Email: <a href="mailto:william.ngbama@gmail.com">william.ngbama@gmail.com</a></div>
+        </li>
+        <li class="footer espace-gauche" id="Tel">
+            <div> T&eacute;l: <a href="tel:0651199224">06 51 19 92 24</a></div>
+        </li>
+        <li class="footer espace-gauche" id="Nom">
+            <div>NGBAMA William</div>
+        </li>
+    </ul>
+</footer>
+<!--<script src="script/eventWheeljs"></script>-->
+<script src="{{ asset('js/sizeAndPlaceHeaderAndParallax.js') }}"></script>
+<script src="{{ asset('js/menu.js') }}"></script>
+<script src="{{ asset('js/sendMail.js') }}"></script>
+<script src="{{ asset('js/CV.js') }}"></script>
+</body>
+</html>
