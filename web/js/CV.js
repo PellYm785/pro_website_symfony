@@ -13,7 +13,6 @@ $.getJSON('/getCvJSON',function (cvData) {
     var formations = new Section('Formations');
 
     for (var type in competencesData){
-        console.log(competencesData[type]);
         var groupeComp = new Category(competencesData[type][0].type);
 
         competencesData[type].forEach(function (competence) {
@@ -23,8 +22,10 @@ $.getJSON('/getCvJSON',function (cvData) {
         competences.add(groupeComp);
     }
 
-    console.log(cvData);
+    cv.add(competences);
     console.log(competences);
+    console.log(cv.build());
+
     //console.log(experiences);
     //console.log(formations);
 });

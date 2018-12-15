@@ -17,7 +17,6 @@ function Category(name, img) {
 
 Category.prototype.add = function(item){
     if(item instanceof Item) {
-        console.log(item);
         this.list.appendChild(item.item);
     }else {
         throw 'It isn\'t Item object';

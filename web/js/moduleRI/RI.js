@@ -3,6 +3,18 @@
  */
 function RI(){
 	this.sections = null;
+
+    this.ri = document.createElement('div');
+    this.menu = document.createElement('ul');
+    this.content = document.createElement('div');
+
+    this.ri.className = 'ri';
+    this.menu.className = 'menu-ri'
+    this.content.className = 'content-ri';
+
+    this.ri.appendChild(this.menu);
+    this.ri.appendChild(this.content);
+    console.log(this.menu);
 }
 
 RI.prototype.add = function(section){
@@ -57,15 +69,26 @@ RI.prototype.build = function(){
 	if(!this.sections){
         throw 'No items is set';
     }
-	
-	var ri = document.createElement('div');
-	ri.className = "ri";
-	
-	
+
+	var textNodemenu = null;
+	var menuLi = null;
+	var context = this;
+
+    console.log(this.menu);
 	this.sections.forEach(function(section){
-		ri.appendChild(section.build());
-	});
+        console.log(this.menu);
+	    textNodemenu = document.createTextNode(section.name);
+	    menuLi = document.createElement('li');
+
+	    menuLi.appendChild(textNodemenu);
+
+	    this.menu.appendChild(menuLi);
+	    menuLi.setAttribute('data-section-ri', section.name);
+
+	    this.menu.appendChild(menuLi);
+	    this.content.appendChild(section.content);
+	}.bind(context));
 	
-	return ri;
+	return this.ri;
 }
 
