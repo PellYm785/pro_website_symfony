@@ -76,7 +76,6 @@ RI.prototype.build = function(){
 
     console.log(this.menu);
 	this.sections.forEach(function(section){
-        console.log(this.menu);
 	    textNodemenu = document.createTextNode(section.name);
 	    menuLi = document.createElement('li');
 
@@ -88,7 +87,5 @@ RI.prototype.build = function(){
 	    this.menu.appendChild(menuLi);
 	    this.content.appendChild(section.content);
 	}.bind(context));
-	
-	return this.ri;
 }
 

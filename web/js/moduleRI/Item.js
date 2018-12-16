@@ -1,4 +1,4 @@
-function Item(text, icon) {
+function Item(text, details) {
     var textNode = document.createTextNode(text);
 
     this.item = document.createElement('li');
@@ -12,6 +12,8 @@ function Item(text, icon) {
 
     this.item.appendChild(this.content);
     this.item.appendChild(this.details);
+
+    this.details.innerHTML += details;
 }
 
 Item.prototype.addContent = function(text){
@@ -25,9 +27,10 @@ Item.prototype.deleteContent = function(){
 Item.prototype.addDetails = function(details){
     if(!this.details){
         this.details = document.createElement('div');
-        this.details.className = 'details';
+        this.details.className = 'details-ri';
+        this.item.appendChild(this.details);
     }
-    this.item.appendChild(this.details);
+
     this.details.innerHTML += details;
 };
 
