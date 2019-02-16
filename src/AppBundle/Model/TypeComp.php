@@ -6,7 +6,7 @@
  * Time: 01:02
  */
 
-namespace AppBundle\model;
+namespace AppBundle\Model;
 
 use \JsonSerializable;
 

@@ -145,3 +145,29 @@ function switch_right(switcher) {
     	switcher.switcherRight.show();
     }
 }
+
+const switcher = new Switch('.section-cv') ;
+
+if($(window).width() > 1655){
+	switcher.disable();
+	$('#CV').removeClass('switcher-container');
+}else{
+	menu_hide = true;
+	$('#CV').addClass('switcher-container');
+	switcher.build();
+	switcher.enable();
+	switcher.replace();
+}
+
+$(window).resize(function(){
+    if($(window).width() > 1655){
+        switcher.disable();
+        $('#CV').removeClass('switcher-container');
+    }else{
+        menu_hide = true;
+		$('#CV').addClass('switcher-container');
+        switcher.build();
+        switcher.enable();
+        switcher.replace();
+    }
+});

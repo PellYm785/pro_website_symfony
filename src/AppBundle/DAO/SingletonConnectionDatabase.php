@@ -25,6 +25,10 @@ class SingletonConnectionDatabase
 
     /**
      * SingletonConnectionDatabase constructor.
+     * @param $dsn
+     * @param $user
+     * @param $pass
+     * @throws DBException
      */
     private function __construct($dsn, $user, $pass){
         try {
@@ -36,7 +40,11 @@ class SingletonConnectionDatabase
 
 
     /**
+     * @param $dsn
+     * @param $user
+     * @param $pass
      * @return PDO
+     * @throws DBException
      */
     public static function getInstance($dsn, $user, $pass){
         if(!self::$bdd){

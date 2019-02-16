@@ -8,7 +8,7 @@
 
 namespace AppBundle\DAO;
 
-use AppBundle\model\Competence;
+use AppBundle\Model\Competence;
 use \PDO;
 use \PDOException;
 use \stdClass;
@@ -24,7 +24,7 @@ class DAOCompetences extends DAO {
         $competence = null;
 
         try{
-            $requete = "SELECT * FROM competences WHERE id_comp = :id";
+            $requete = "SELECT * FROM competence WHERE id_comp = :id";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -55,7 +55,7 @@ class DAOCompetences extends DAO {
         $competences[] = null;
 
         try{
-            $requete = "SELECT * FROM competences WHERE type = :id";
+            $requete = "SELECT * FROM competence WHERE type = :id";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -86,7 +86,7 @@ class DAOCompetences extends DAO {
         $competences[] = null;
 
         try{
-            $requete = "SELECT * FROM competences WHERE niveau = :id";
+            $requete = "SELECT * FROM competence WHERE niveau = :id";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -122,14 +122,14 @@ class DAOCompetences extends DAO {
                 'base_de_donnees',
                 'cms',
                 'conception',
-                'design_patterns',
-                'frameworks',
+                'design_pattern',
+                'framework',
                 'langages_de_programmation',
                 'langue',
-                'logiciels',
+                'logiciel',
                 'programmation_web',
                 'qualite',
-                'systemes_d_exploitation',
+                'systeme_d_exploitation',
                 'versioning'
             );
 
@@ -156,13 +156,14 @@ class DAOCompetences extends DAO {
 
     /**
      * @param Competence $comp
+     * @return bool
      * @throws DBException
      */
-    public function create(Competence &$comp){
+    public function create(Competence $comp){
         $res = false;
 
         try{
-            $requete = "INSERT INTO competences(nom, type, niveau, langage) VALUES(:nom, :type, :niveau, :langage)";
+            $requete = "INSERT INTO competence(nom, type, niveau, langage) VALUES(:nom, :type, :niveau, :langage)";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -215,7 +216,7 @@ class DAOCompetences extends DAO {
         $res = false;
 
         try{
-            $requete ='UPDATE competences 
+            $requete ='UPDATE competence 
                        SET 
                           nom = :nom, 
                           type = :type, 
@@ -249,7 +250,7 @@ class DAOCompetences extends DAO {
         $competences = null;
 
         try{
-            $requete = "SELECT * FROM competences";
+            $requete = "SELECT * FROM competence";
 
             $res = $this->_connex->query($requete);
 

@@ -9,7 +9,7 @@
 namespace AppBundle\DAO;
 
 
-use AppBundle\model\Experience;
+use AppBundle\Model\Experience;
 use \PDO;
 use \PDOException;
 

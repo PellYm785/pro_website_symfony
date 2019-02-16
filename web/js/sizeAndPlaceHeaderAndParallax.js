@@ -1,21 +1,18 @@
-
-var switcher = new Switch('.section-cv') ;
-
-$('video').css('width', $(window).width());
-$('header').ready(function (){
-    setTimeout(resizeAndReplaceBackContent, 15);
-});
-
-
-
-$(window).resize(function() {
+$(function () {
     $('video').css('width', $(window).width());
-    setTimeout(resizeAndReplaceBackContent, 15);
+    $('header').ready(function (){
+        setTimeout(resizeAndReplaceBackContent, 15);
+    });
+    $('#video-container').css('height', $('header').height());
+
+
+    $(window).resize(function() {
+        $('video').css('width', window.innerWidth);
+        setTimeout(resizeAndReplaceBackContent, 15);
+        $('#video-container').css('height', $('header').height());
+
+    });
 });
-
-
-
-
 
 function resizeAndReplaceBackContent(){
     var content_offset = $('#content').offset();

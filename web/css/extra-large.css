@@ -1,52 +1,61 @@
 /* Ordi Plein-écran*/
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 1200px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-
-    * { margin:0; padding:0; box-sizing:border-box; }
     /* -- en-tête*/
     header {
         text-align: center;
         font-family: Trebuchet MS;
         color: white;
-        background: linear-gradient(135deg, rgba(134, 255, 148, 0.5) 0%, rgba(0,0,0,0.5) 74%);
+        background: linear-gradient(135deg, rgba(134, 255, 148, 0.5) 0%, rgba(0, 0, 0, 0.5) 74%);
         margin: auto;
         display: flex;
-        height: 50%;
+        height: 404px;
+        overflow: hidden;
     }
 
-    video{
+    #video-container {
         position: absolute;
         z-index: -100;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 404px;
+        overflow: hidden;
     }
 
-    h1{
+    h1 {
         margin: auto;
     }
 
     /* -- menu */
-
-
     nav {
         position: fixed;
         display: flex;
         background: #1b1b1b;
-        height: 5%;
+        height: 3em;
         width: 100%;
-        left: 0px;
-        top: 0px;
+        left: 0;
+        top: 0;
     }
 
+    a {
+        text-decoration: none;
+        color: #a4a4a4;
+    }
 
     #container-icon-menu {
         display: flex;
         margin-right: 2px;
         color: #838383;
-        width: 5%;
-	}
+        width: 100px;
+    }
 
-    #container-icon-menu *{
+    #container-icon-menu * {
         margin-top: auto;
         margin-bottom: auto;
         font-family: Arial;
@@ -63,7 +72,7 @@
         background-color: #111111;
     }
 
-    #close-menu{
+    #close-menu {
         position: fixed;
         top: 15px;
         right: 15px;
@@ -80,31 +89,36 @@
         /*font-weight: bold;*/
         height: 40px;
         list-style: none;
-        border-bottom: rgba(255,255,255,0.25) solid 1px;
+        border-bottom: rgba(255, 255, 255, 0.25) solid 1px;
         padding-left: 1em;
         padding-right: 1em;
     }
 
-    nav li:last-of-type{
+    nav li:last-of-type {
         border-bottom: 0;
     }
 
-    nav li div {
+    nav li a {
         margin: auto;
         width: 100%;
+        color: white;
         text-align: center;
     }
+
     .selected {
         color: #58d9ff;
+        pointer-events: none;
     }
+
     nav div {
         margin: auto;
     }
+
     .hide {
         display: none !important;
     }
 
-    #background-content{
+    #background-content {
         position: absolute;
         background: url(../image/fondLM.png) no-repeat center fixed;
         -webkit-background-size: cover; /* pour anciens Chrome et Safari */
@@ -113,44 +127,53 @@
         padding: 5px;
     }
 
-    #content{
-        background: rgba(255,255,255,0.9);
+    #content {
+        background: rgba(255, 255, 255, 0.9);
         padding-top: 25px;
         padding-bottom: 25px;
+        height: 55em;
+        display: flex;
     }
+
+    section{
+        margin: auto;
+    }
+
     /* -- Lettre de motivation */
     #LM article {
-        margin: auto;
-        margin-top: 2.5%;
-        margin-bottom: 2.5%;
+        margin: 2.5% auto 2.5% auto;
         overflow: auto;
-        width: 31%;
-        background: rgba(255, 255, 255,0.9);
+        width: 40em;
+        background: rgba(255, 255, 255, 0.9);
         font-family: Trebuchet MS;
         text-align: justify;
-        padding: 2%;
-        padding-bottom: 1%;
-
+        padding: 10%;
     }
+
     #date {
         margin-right: 5%;
         margin-bottom: 8%;
         text-align: right;
     }
+
     #debutCorps {
         margin-top: 5%;
     }
+
     #corps {
         margin-top: 5%;
     }
+
     #pied {
         margin-top: 10%;
         margin-right: 5%;
         text-align: right;
     }
+
     .sans_espace {
         margin: 0px;
     }
+
     .sans_espace_top {
         margin-top: 0px;
     }
@@ -163,6 +186,7 @@
         background-size: 9%;
         display: flex;
     }
+
     .titre_comp {
         display: flex;
         background: black;
@@ -182,143 +206,160 @@
         background: rgba(255, 255, 255, 0.86);
         margin-top: 0px;
         margin-bottom: 0px;
+        padding: 10%;
         overflow: auto;
     }
- 	.section-cv {
-		width: 30%;
+
+    .section-cv {
+        width: 30%;
         height: 100%;
         margin-left: 5%;
         margin-right: 5%;
-	}
+    }
+
+    .switcher-container .section-cv{
+        width: 20em;
+        height: 100%;
+        margin: auto;
+    }
 
     .competence {
         font-family: Arial;
-        font-weight: 700;
         list-style: none;
         margin-bottom: 5%;
         margin-left: 10%;
     }
+
+    .competence:last-of-type{
+        margin-bottom: 10%;
+    }
+
     .categorie {
         text-decoration: underline;
         font-family: Arial;
         font-weight: bold;
         list-style: none;
+        margin-top: 12%;
         margin-bottom: 10%;
-        margin-top: 10%;
     }
+
+    .categorie:first-of-type{
+        margin-top: 0;
+    }
+
     .formation, .experience {
         font-family: Arial;
         font-weight: bold;
         list-style: none;
         margin-bottom: 20%;
     }
+
     .formation:last-child, .experience:last-child {
         margin-bottom: 0;
     }
+
+    .formation p, .experience p {
+        padding: 5px;
+    }
+
     .commentaire {
         font-style: italic;
         font-weight: 800;
     }
+
     .diplome, .poste {
         text-decoration: underline;
     }
+
     .date {
         font-weight: normal;
     }
 
-    #Contact{
+    #Contact {
         display: flex;
         flex-direction: column;
         background-color: #fff;
-        width: 30%;
-        height: 50%;
+        width: 50%;
+        height: 75%;
         margin: auto;
-        border-radius: 20px;
         border: #cfd0c3 solid 1px;
     }
 
 
-
-    #Contact *{
-        width: 90%;
+    #Contact * {
         margin: auto;
     }
 
-    #Contact label{
-        background-color: black;
-        color: white;
+    #Contact label {
+        background-color: #adadad;
+        color: #4b4b4b;
         font-family: Arial;
         padding: 10px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
         width: 100%;
     }
 
-    #Contact label p{
-        width: 90%;
+    #Contact label p {
+        width: 95%;
     }
 
-    #emailContact{
+    #emailContact {
         border: 0;
+        width: 95%;
     }
 
-    #objet{
+    #objet {
+        width: 95%;
         border-width: 1px;
         border-left: 0;
         border-right: 0;
-        border-top-color: #000;
-        border-bottom-color: #000 ;
+        border-bottom-color: #000;
     }
 
-    #Contact input{
+    #Contact input {
         padding: 8px;
     }
 
-    #sendButton{
+    #sendButton {
         width: 15%;
         padding: 8px;
-        background-color: #0072c2;
+        background-color: #d4d4d4;
         color: white;
         border: 0;
-        border-radius: 10px;
-        margin-right: 0px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
     }
 
-    #message{
+    #message {
         height: 500px;
         background-color: white;
         font-family: Arial;
     }
 
     footer {
-        clear: left;
-        height: 2em;
-        position: fixed;
-        bottom: 20px;
+        padding: 20px;
         width: 100%;
+        background-color: #1b1b1b;
+        text-align: center;
     }
+
     footer ul {
-        display: flex;
-        width: 50%;
-        margin: auto;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
-    footer li {
-        display: flex;
-        height: 2em;
-        width: 20%;
-        border-radius: 19px;
-        font-family: Arial;
+
+    footer li{
+        float: left;
+        padding: 2px 20px;
+        border-right: 1px solid rgba(255, 255, 255, 0.25);
         color: white;
-        padding-left: 1%;
-        padding-right: 1%;
-        background: rgba(205, 205, 205, 0.6);
-        box-shadow: 1px 1px 12px #a8ffbb;
-        margin-left: 4.8%;
+        font-family: Arial;
     }
-    footer li div {
-        margin: auto;
+
+    footer li:last-of-type{
+        border: none;
     }
-    #Email {
-        width: 31%;
-    }
+
 }

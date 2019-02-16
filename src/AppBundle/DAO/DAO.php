@@ -9,6 +9,8 @@
 namespace AppBundle\DAO;
 
 
+use PDO;
+
 /**
  * Class DAO
  * @package DAO
@@ -23,9 +25,9 @@ abstract class DAO
     /**
      * DAO constructor.
      */
-    public function __construct($dsn, $user, $pass)
+    public function __construct($_connex)
     {
-        $this->_connex = SingletonConnectionDatabase::getInstance($dsn, $user, $pass);
+        $this->_connex = $_connex;
     }
 
 }

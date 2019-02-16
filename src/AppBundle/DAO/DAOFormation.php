@@ -9,7 +9,7 @@
 namespace AppBundle\DAO;
 
 
-use AppBundle\model\Formation;
+use AppBundle\Model\Formation;
 use \PDO;
 use \PDOException;
 
@@ -23,7 +23,7 @@ class DAOFormation extends DAO {
         $formation = null;
 
         try{
-            $requete = "SELECT * FROM formations WHERE id_form = :id";
+            $requete = "SELECT * FROM formation WHERE id_form = :id";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -49,13 +49,14 @@ class DAOFormation extends DAO {
 
     /**
      * @param Formation $form
+     * @return bool
      * @throws DBException
      */
-    public function create(Formation &$form){
+    public function create(Formation $form){
         $res = false;
 
         try{
-            $requete = "INSERT INTO formations(nom, etablissement, ville, debut, fin, commentaire) VALUES(:nom, :etablissement, :ville, :debut, :fin, :commentaire)";
+            $requete = "INSERT INTO formation(nom, etablissement, ville, debut, fin, commentaire) VALUES(:nom, :etablissement, :ville, :debut, :fin, :commentaire)";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -88,7 +89,7 @@ class DAOFormation extends DAO {
         $res = false;
 
         try{
-            $requete = "DELETE FROM formations WHERE id_form = :id";
+            $requete = "DELETE FROM formation WHERE id_form = :id";
 
             $prep = $this->_connex->prepare($requete);
 
@@ -110,7 +111,7 @@ class DAOFormation extends DAO {
         $res = false;
 
         try{
-            $requete ='UPDATE formations 
+            $requete ='UPDATE formation 
                        SET 
                           nom = :nom, 
                           etablissement = :etablissement, 
@@ -148,7 +149,7 @@ class DAOFormation extends DAO {
         $formations = null;
 
         try{
-            $requete = "SELECT * FROM formations";
+            $requete = "SELECT * FROM formation";
 
             $res = $this->_connex->query($requete);
 

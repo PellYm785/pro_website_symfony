@@ -9,7 +9,7 @@
 namespace AppBundle\DAO;
 
 
-use AppBundle\model\NiveauComp;
+use AppBundle\Model\NiveauComp;
 use \PDO;
 use \PDOException;
 

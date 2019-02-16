@@ -195,7 +195,7 @@
 
 	}
 
-    .Competence {
+    .competence {
         font-family: Arial;
         font-weight: 700;
         list-style: none;
@@ -210,13 +210,13 @@
         margin-bottom: 10%;
         margin-top: 10%;
     }
-    .Formation, .Experience {
+    .formation, .experience {
         font-family: Arial;
         font-weight: bold;
         list-style: none;
         margin-bottom: 20%;
     }
-    .Formation:last-child, .Experience:last-child {
+    .formation:last-child, .experience:last-child {
         margin-bottom: 0;
     }
     .commentaire {

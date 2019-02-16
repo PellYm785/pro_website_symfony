@@ -7,7 +7,7 @@
  */
 
 
-namespace AppBundle\model;
+namespace AppBundle\Model;
 
 use \JsonSerializable;
 

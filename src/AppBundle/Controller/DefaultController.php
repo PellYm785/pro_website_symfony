@@ -7,7 +7,8 @@ use AppBundle\DAO\DAOExperience;
 use AppBundle\DAO\DAOFormation;
 use AppBundle\DAO\DAONiveauComp;
 use AppBundle\DAO\DAOTypeComp;
-use AppBundle\model\Cv;
+use AppBundle\DAO\DBException;
+use AppBundle\Model\Cv;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,78 +19,75 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/lettre-de-motivation", name="lmpage")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function lmAction()
     {
-        if (file_exists('../src/AppBundle/model/LM.xml')) {
-            $xml = simplexml_load_file('../src/AppBundle/model/LM.xml');
+        if (file_exists(__DIR__ . '/../Model/LM.xml')) {
+            $xml = simplexml_load_file(__DIR__ . '/../Model/LM.xml');
         } else {
             exit('Echec lors de l\'ouverture du fichier LM.xml.');
         }
-        $cv = null;
-        $comps = null;
 
-        $container = $this->container;
-
-        $dsn = 'mysql:host=' .
-            $container->getParameter('database_host') . ';dbname=' . $container->getParameter('database_name') . ';charset=UTF8';
-        $user = $container->getParameter('database_user');
-        $pass = $container->getParameter('database_password');
-        $daoComp = new DAOCompetences($dsn, $user, $pass);
-        $daoForm = new DAOFormation($dsn, $user, $pass);
-        $daoTypeComp = new DAOTypeComp($dsn, $user, $pass);
-        $daoNiveauComp = new DAONiveauComp($dsn, $user, $pass);
-        $daoExp = new DAOExperience($dsn, $user, $pass);
-
-        $comps = $daoComp->readByViews();
-        $forms = $daoForm->readAll();
-        $typeComp = $daoTypeComp->readAll();
-        $niveauComp = $daoNiveauComp->readAll();
-        $exps = $daoExp->readAll();
-
-        $cv = new Cv($forms, $typeComp, $niveauComp, $comps, $exps);
-
-        // replace this example code with whatever you need
-        return $this->render('index/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'lm' => $xml,
-            'cv' => $cv
+        return $this->render('lm.html.twig', [
+            'xml' => $xml,
+            'page' => 'lm'
         ]);
     }
 
     /**
-     * @Route("/getCvJSON", name="cv_json")
+     * @Route("/curriculum-vitae", name="cvpage")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getCv(Request $request){
+    public function cvAction()
+    {
         $cv = null;
         $comps = null;
 
-        $container = $this->container;
+        $connec = $this->getDoctrine()->getConnection();
 
-        $dsn = 'mysql:host=' .
-            $container->getParameter('database_host') . ';dbname=' . $container->getParameter('database_name') . ';charset=UTF8';
-        $user = $container->getParameter('database_user');
-        $pass = $container->getParameter('database_password');
-        $daoComp = new DAOCompetences($dsn, $user, $pass);
-        $daoForm = new DAOFormation($dsn, $user, $pass);
-        $daoTypeComp = new DAOTypeComp($dsn, $user, $pass);
-        $daoNiveauComp = new DAONiveauComp($dsn, $user, $pass);
-        $daoExp = new DAOExperience($dsn, $user, $pass);
+        $daoComp = new DAOCompetences($connec);
+        $daoForm = new DAOFormation($connec);
+        $daoTypeComp = new DAOTypeComp($connec);
+        $daoNiveauComp = new DAONiveauComp($connec);
+        $daoExp = new DAOExperience($connec);
 
-        $comps = $daoComp->readByViews();
-        $forms = $daoForm->readAll();
-        $typeComp = $daoTypeComp->readAll();
-        $niveauComp = $daoNiveauComp->readAll();
-        $exps = $daoExp->readAll();
+        try {
+            $comps = $daoComp->readByViews();
+            $forms = $daoForm->readAll();
+            $typeComp = $daoTypeComp->readAll();
+            $niveauComp = $daoNiveauComp->readAll();
+            $exps = $daoExp->readAll();
+        } catch (DBException $exception) {
+            echo $exception->getMessage();
+        }
+        if (!empty($typeComp) && !empty($comps) && !empty($niveauComp) && !empty($exps) && !empty($forms)) {
+            $cv = new Cv($forms, $typeComp, $niveauComp, $comps, $exps);
+        }
 
-        $cv = new Cv($forms, $typeComp, $niveauComp, $comps, $exps);
+        return $this->render('cv.html.twig', [
+            'cv' => $cv,
+            'page' => 'cv'
+        ]);
+    }
 
-        return new JsonResponse($cv);
+    /**
+     * @Route("/contact", name="contactpage")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function contactAction()
+    {
+        return $this->render('contact.html.twig', [
+            'page' => 'contact'
+        ]);
     }
 
     /**
      * @Route("/sendMail", name="sendMail")
+     * @param Request $request
+     * @param Swift_Mailer $mailer
+     * @return JsonResponse
      */
     public function sendMail(Request $request, Swift_Mailer $mailer)
     {
@@ -99,15 +97,22 @@ class DefaultController extends Controller
             ->setBody(
                 $request->request->get('message'),
                 'text/html'
-            )
-        ;
+            );
 
+        $error = null;
         $mailer->send($message, $error);
-        var_dump($error);
         // or, you can also fetch the mailer service this way
         // $this->get('mailer')->send($message);
 
         return new JsonResponse($error);
     }
 
+    /**
+     *
+     * @Route("/", name="indexPage")
+     */
+    public function indexAction()
+    {
+        return $this->redirectToRoute('lmpage');
+    }
 }

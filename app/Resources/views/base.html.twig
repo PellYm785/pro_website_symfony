@@ -1,13 +1,104 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Présentation</title>
+    <link rel="stylesheet"
+          href="{{ asset('css/small.css') }}"/>
+    <link rel="stylesheet"
+          href="{{ asset('css/medium.css') }}"/>
+    <link rel="stylesheet"
+          href="{{ asset('css/large.css') }}"/>
+    <link rel="stylesheet"
+          href="{{ asset('css/extra-large.css') }}"/>
+
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("body").css({height: $(window).height() * 0.85});
+        });
+    </script>
+</head>
+<body>
+<header>
+    <div id="video-container">
+        <video autoplay
+               loop>
+            <source src="{{ asset('video/video-background.mp4') }}"
+                    type="video/mp4">
+        </video>
+    </div>
+    <h1>
+        PRESENTATION NGBAMA William
+    </h1>
+</header>
+<nav>
+    <div id="container-icon-menu">
+        {{ source('icon-menu.svg') }}
+
+        <span>
+            Menu
+        </span>
+    </div>
+
+    <div id="menu">
+        {{ source('close-menu.svg') }}
+        <ul>
+            <li id="LM_in"
+                data-link="LM">
+                <a class="{% if page == 'lm' %}selected{% endif %}" href="{{ path('lmpage') }}">
+                    Lettre de motivation
+                </a>
+            </li>
+            <li id="CV_in"
+                data-link="CV">
+                <a class="{% if page == 'cv' %}selected{% endif %}" href="{{ path('cvpage') }}">
+                    Curriculum Vitae
+                </a>
+            </li>
+            <li id="Contact_in"
+                data-link="Contact">
+                <a class="{% if page == 'contact' %}selected{% endif %}" href="{{ path('contactpage') }}">
+                    Contact
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="background-content"></div>
+<div id="content">
+    {% block section %}{% endblock %}
+</div>
+<footer>
+    <ul>
+        <li class="footer"
+            id="Email">
+            <p>
+                Email:
+                <a href="mailto:william.ngbama@gmail.com"> william.ngbama@gmail.com</a>
+            </p>
+        </li>
+        <li class="footer"
+            id="Tel">
+            <p>
+                T&eacute;l:
+                <a href="tel:0651199224">06 51 19 92 24</a>
+            </p>
+        </li>
+        <li class="footer"
+            id="Nom">
+            <p>NGBAMA William</p>
+        </li>
+    </ul>
+</footer>
+
+<script src="{{ asset('js/menu.js') }}"></script>
+<script src="{{ asset('js/sizeAndPlaceHeaderAndParallax.js') }}"></script>
+{% block javascript_body %}{% endblock %}
+<!--<script src="script/eventWheeljs"></script>-->
+
+
+</body>
 </html>
