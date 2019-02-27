@@ -1,0 +1,25 @@
+.switcher-container{
+    position: relative !important;
+}
+
+.switcher-right{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+}
+
+.switcher-left{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+}
+
+@media (max-width: 576px) {
+    .switcher-right{
+        top: 105%;
+    }
+
+    .switcher-left{
+        top: 105%;
+    }
+}

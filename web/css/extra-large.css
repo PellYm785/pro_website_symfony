@@ -29,7 +29,12 @@
     }
 
     h1 {
+        display: flex;
         margin: auto;
+    }
+
+    h1 p{
+        margin-left: 10px;
     }
 
     /* -- menu */
@@ -54,6 +59,7 @@
         color: #838383;
         width: 100px;
     }
+
 
     #container-icon-menu * {
         margin-top: auto;
@@ -275,7 +281,7 @@
         font-weight: normal;
     }
 
-    #Contact {
+    #contact {
         display: flex;
         flex-direction: column;
         background-color: #fff;
@@ -286,11 +292,11 @@
     }
 
 
-    #Contact * {
+    #contact * {
         margin: auto;
     }
 
-    #Contact label {
+    #contact label {
         background-color: #adadad;
         color: #4b4b4b;
         font-family: Arial;
@@ -298,7 +304,7 @@
         width: 100%;
     }
 
-    #Contact label p {
+    #contact label p {
         width: 95%;
     }
 
@@ -315,7 +321,7 @@
         border-bottom-color: #000;
     }
 
-    #Contact input {
+    #contact input {
         padding: 8px;
     }
 
@@ -354,6 +360,7 @@
         float: left;
         padding: 2px 20px;
         border-right: 1px solid rgba(255, 255, 255, 0.25);
+        border-bottom: none;
         color: white;
         font-family: Arial;
     }

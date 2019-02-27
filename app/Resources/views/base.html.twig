@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, height=device-height" />
     <title>Présentation</title>
+    <link rel="stylesheet"
+          href="{{ asset('css/extra-small.css') }}"/>
     <link rel="stylesheet"
           href="{{ asset('css/small.css') }}"/>
     <link rel="stylesheet"
@@ -11,12 +14,14 @@
           href="{{ asset('css/large.css') }}"/>
     <link rel="stylesheet"
           href="{{ asset('css/extra-large.css') }}"/>
+    <link rel="stylesheet"
+          href="{{ asset('css/pluginPageEffect.css') }}"/>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $("body").css({height: $(window).height() * 0.85});
+            $("body").css({height: $(window).height()});
         });
     </script>
 </head>
@@ -30,7 +35,7 @@
         </video>
     </div>
     <h1>
-        PRESENTATION NGBAMA William
+        PRESENTATION <p>NGBAMA William</p>
     </h1>
 </header>
 <nav>
@@ -94,8 +99,9 @@
     </ul>
 </footer>
 
-<script src="{{ asset('js/menu.js') }}"></script>
+
 <script src="{{ asset('js/sizeAndPlaceHeaderAndParallax.js') }}"></script>
+<script src="{{ asset('js/menu.js') }}"></script>
 {% block javascript_body %}{% endblock %}
 <!--<script src="script/eventWheeljs"></script>-->
 

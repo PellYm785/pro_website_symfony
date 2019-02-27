@@ -29,7 +29,12 @@
     }
 
     h1 {
+        display: flex;
         margin: auto;
+    }
+
+    h1 p{
+        margin-left: 10px;
     }
 
     /* -- menu */
@@ -140,16 +145,13 @@
 
     /* -- Lettre de motivation */
     #LM article {
-        margin: auto;
-        margin-top: 2.5%;
-        margin-bottom: 2.5%;
+        margin: 2.5% auto 2.5% auto;
         overflow: auto;
-        width: 31%;
+        width: 40em;
         background: rgba(255, 255, 255, 0.9);
         font-family: Trebuchet MS;
         text-align: justify;
-        padding: 2%;
-        padding-bottom: 1%;
+        padding: 10%;
 
     }
 
@@ -278,22 +280,22 @@
         font-weight: normal;
     }
 
-    #Contact {
+    #contact {
         display: flex;
         flex-direction: column;
         background-color: #fff;
-        width: 50%;
+        width: 95%;
         height: 75%;
         margin: auto;
         border: #cfd0c3 solid 1px;
     }
 
 
-    #Contact * {
+    #contact * {
         margin: auto;
     }
 
-    #Contact label {
+    #contact label {
         background-color: #adadad;
         color: #4b4b4b;
         font-family: Arial;
@@ -301,7 +303,7 @@
         width: 100%;
     }
 
-    #Contact label p {
+    #contact label p {
         width: 95%;
     }
 
@@ -318,7 +320,7 @@
         border-bottom-color: #000;
     }
 
-    #Contact input {
+    #contact input {
         padding: 8px;
     }
 
