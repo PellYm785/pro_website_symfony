@@ -16,10 +16,14 @@
 
 @media (max-width: 576px) {
     .switcher-right{
-        top: 105%;
+        position: absolute;
+        top: 95%;
+        right: 10%;
     }
 
     .switcher-left{
-        top: 105%;
+        position: absolute;
+        top: 95%;
+        left: 10%;
     }
 }

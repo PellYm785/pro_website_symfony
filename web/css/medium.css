@@ -46,6 +46,7 @@
         width: 100%;
         left: 0px;
         top: 0px;
+        z-index: 9999;
     }
 
     a {
@@ -337,8 +338,11 @@
 
     #message {
         height: 500px;
+        width: 100%;
+        overflow: auto;
         background-color: white;
         font-family: Arial;
+        outline: none;
     }
 
     footer {

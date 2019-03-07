@@ -12,6 +12,7 @@ const Switch = (function () {
         this.elements = null;
         this.built = false;
         this.isEnable = false;
+        this.animation = false;
     }
 
     Switch.prototype.switchLeft = function (switcher) {
@@ -64,6 +65,7 @@ const Switch = (function () {
             this.switcherLeft = activeElement.parentElement.getElementsByClassName('switcher-left')[0];
             this.switcherRight = activeElement.parentElement.getElementsByClassName('switcher-right')[0];
 
+            this.switcherLeft.style.display = 'none';
             const object = this;
 
             this.switcherLeft.addEventListener('click', function () {
@@ -73,17 +75,17 @@ const Switch = (function () {
                 this.switchRight(object);
             }.bind(object));
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const object = this;
-                Array.prototype.forEach.call(this.elements, function (section) {
-                    let dataOffset = {
-                        defaultDiffX: 0,
-                        prevX: 0,
-                        element: section
-                    };
+            Array.prototype.forEach.call(this.elements, function (section) {
+                let dataOffset = {
+                    defaultDiffX: 0,
+                    prevX: 0,
+                    element: section
+                };
 
-                    const handlerMouseTouch = this.handlerMove(dataOffset);
-                    section.addEventListener('mousedown', function (event) {
+                const handlerMouseTouch = this.handlerMove(dataOffset);
+
+                section.addEventListener('mousedown', function (event) {
+                    if (this.isEnable && !this.animation) {
                         dataOffset.element.style.top = dataOffset.element.offsetTop + 'px';
                         dataOffset.element.style.left = dataOffset.element.offsetLeft + 'px';
                         dataOffset.defaultDiffX = parseInt(section.style.left) - event.clientX;
@@ -94,12 +96,12 @@ const Switch = (function () {
                         document.body.style.overflow = 'hidden';
 
                         section.addEventListener('mousemove', handlerMouseTouch);
-                        document.addEventListener('mouseup', this.handleMouseUp(handlerMouseTouch, dataOffset), {'once' : true});
-                    }.bind(this));
+                        document.addEventListener('mouseup', this.handleMouseUp(handlerMouseTouch, dataOffset), {'once': true});
+                    }
+                }.bind(this));
 
-
-
-                    section.addEventListener('touchstart', function (event) {
+                section.addEventListener('touchstart', function (event) {
+                    if (this.isEnable && !this.animation) {
                         dataOffset.element.style.top = dataOffset.element.offsetTop + 'px';
                         dataOffset.element.style.left = dataOffset.element.offsetLeft + 'px';
                         dataOffset.defaultDiffX = parseInt(section.style.left) - event.touches[0].clientX;
@@ -109,11 +111,10 @@ const Switch = (function () {
                         dataOffset.element.style.position = 'absolute';
                         document.body.style.overflow = 'hidden';
 
-                        document.addEventListener('touchmove', handlerMouseTouch);
-                    });
-
-                    section.addEventListener('touchend', this.handleTouchEnd(handlerMouseTouch, dataOffset))
-                }.bind(object));
+                        section.addEventListener('touchmove', handlerMouseTouch);
+                        document.addEventListener('touchend', this.handleTouchEnd(handlerMouseTouch, dataOffset), {'once': true});
+                    }
+                }.bind(this));
             }.bind(object));
 
             this.built = true;
@@ -122,18 +123,19 @@ const Switch = (function () {
 //Handlers Mouse
     Switch.prototype.handleMouseUp = function (handlerMouseTouch, dataOffset) {
         return function (event) {
+
             let section = dataOffset.element;
             section.removeEventListener('mousemove', handlerMouseTouch);
             document.body.style.overflow = 'auto';
 
-            if(parseFloat(section.style.left) <= 15 && this.switcherRight.style.display !== 'none'){
+            if (parseFloat(section.style.left) <= 15 && this.switcherRight.style.display !== 'none') {
                 this.switchRight(this);
-            }else if(parseFloat(section.style.left) >= section.parentNode.clientWidth - section.clientWidth - 15 && this.switcherLeft.style.display !== 'none'){
+            } else if (parseFloat(section.style.left) >= section.parentNode.clientWidth - section.clientWidth - 15 && this.switcherLeft.style.display !== 'none') {
                 this.switchLeft(this);
-            }else{
-                if(section.offsetLeft > (section.parentNode.clientWidth/2 - section.clientWidth/2)){
+            } else {
+                if (section.offsetLeft > (section.parentNode.clientWidth / 2 - section.clientWidth / 2)) {
                     this.slideToOriginFromRight(section, dataOffset.defaultX);
-                }else {
+                } else {
                     this.slideToOriginFromLeft(section, dataOffset.defaultX);
                 }
             }
@@ -141,19 +143,19 @@ const Switch = (function () {
     }
 
     Switch.prototype.handleTouchEnd = function (handlerMouseTouch, dataOffset) {
-        return function () {
+        return function (event) {
             let section = dataOffset.element;
-            document.removeEventListener('touchmove', handlerMouseTouch);
+            section.removeEventListener('touchmove', handlerMouseTouch);
             document.body.style.overflow = 'auto';
 
-            if(parseFloat(section.style.left) <= 15 && this.switcherRight.style.display !== 'none'){
+            if (parseFloat(section.style.left) <= 15 && this.switcherRight.style.display !== 'none') {
                 this.switchRight(this);
-            }else if(parseFloat(section.style.left) >= section.parentNode.clientWidth - section.clientWidth - 15 && this.switcherLeft.style.display !== 'none'){
+            } else if (parseFloat(section.style.left) >= section.parentNode.clientWidth - section.clientWidth - 15 && this.switcherLeft.style.display !== 'none') {
                 this.switchLeft(this);
-            }else{
-                if(section.offsetLeft > (section.parentNode.clientWidth/2 - section.clientWidth/2)){
+            } else {
+                if (section.offsetLeft > (section.parentNode.clientWidth / 2 - section.clientWidth / 2)) {
                     this.slideToOriginFromRight(section, dataOffset.defaultX);
-                }else {
+                } else {
                     this.slideToOriginFromLeft(section, dataOffset.defaultX);
                 }
             }
@@ -167,13 +169,13 @@ const Switch = (function () {
             let direction = dataOffset.prevX - x < 0 ? 'right' : 'left';
 
 
-            if (!((parseFloat(dataOffset.element.style.left) <= -dataOffset.element.clientWidth/2 && direction === 'left') || (parseFloat(dataOffset.element.style.left) >= element.parentNode.clientWidth - dataOffset.element.clientWidth/2 && direction === 'right'))) {
+            if (!((parseFloat(dataOffset.element.style.left) <= -dataOffset.element.clientWidth / 2 && direction === 'left') || (parseFloat(dataOffset.element.style.left) >= element.parentNode.clientWidth - dataOffset.element.clientWidth / 2 && direction === 'right'))) {
                 dataOffset.element.style.left = (dataOffset.defaultDiffX + x) + 'px';
                 dataOffset.prevX = x;
             }
 
             dataOffset.element.style.opacity = 1 - (Math.abs(x - element.parentNode.offsetLeft - element.parentNode.clientWidth / 2) * 0.3 / (element.parentNode.clientWidth / 2));
-            dataOffset.element.style.transform = 'scale('+(1 - (Math.abs(x - element.parentNode.offsetLeft - element.parentNode.clientWidth / 2) * 0.5 / (element.parentNode.clientWidth / 2)))+')';
+            dataOffset.element.style.transform = 'scale(' + (1 - (Math.abs(x - element.parentNode.offsetLeft - element.parentNode.clientWidth / 2) * 0.5 / (element.parentNode.clientWidth / 2))) + ')';
         }
     }
 
@@ -220,35 +222,38 @@ const Switch = (function () {
     Switch.prototype.fadeOutSlideRight = function (section) {
         const offsetLeft = section.offsetLeft;
         const offsetTop = section.offsetTop;
-        const step = offsetLeft/20;
+        const step = offsetLeft / 20;
         const end = section.parentNode.clientWidth - section.clientWidth;
+        const object = this;
 
         section.style.position = 'absolute';
-        section.style.top = offsetTop+'px';
-        section.style.left = offsetLeft+'px';
+        section.style.top = offsetTop + 'px';
+        section.style.left = offsetLeft + 'px';
         section.style.opacity = '1';
         section.style.transform = 'scale(1)';
+        this.animation = true;
 
-        (function slideRight(){
+        (function slideRight() {
             const left = parseFloat(section.style.left);
-            const stepOp = 0.7/20;
-            const stepScale = 0.2/20;
+            const stepOp = 0.7 / 20;
+            const stepScale = 0.2 / 20;
             const regexScale = /scale\((\d+(\.\d+)?)\)/;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            section.style.left = (left + step)+'px';
+            section.style.left = (left + step) + 'px';
             section.style.opacity = parseFloat(section.style.opacity) - stepOp;
-            section.style.transform = 'scale('+ (scale-stepScale) +')';
+            section.style.transform = 'scale(' + (scale - stepScale) + ')';
 
-            if(left < end){
-                setTimeout(slideRight,10);
-            }else{
+            if (left < end) {
+                setTimeout(slideRight.bind(this), 10);
+            } else {
                 section.style.display = 'none';
                 section.style.position = 'static';
                 section.style.transform = 'scale(1)';
                 section.style.opacity = '1';
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
     }
 
     Switch.prototype.fadeInSlideLeft = function (section) {
@@ -256,149 +261,170 @@ const Switch = (function () {
         const offsetLeft = section.offsetLeft;
         const offsetTop = section.offsetTop;
         const start = section.parentNode.clientWidth - section.clientWidth;
-        const step = (start - offsetLeft)/20;
+        const step = (start - offsetLeft) / 20;
+        const object = this;
 
         section.style.position = 'absolute';
-        section.style.top = offsetTop+'px';
-        section.style.left = start+'px';
+        section.style.top = offsetTop + 'px';
+        section.style.left = start + 'px';
         section.style.opacity = '0.3';
         section.style.transform = 'scale(0.8)';
+        this.animation = true;
 
-
-        (function slideLeft(){
+        (function slideLeft() {
             const left = parseFloat(section.style.left);
-            const stepOp = 0.7/20;
-            const stepScale = 0.2/20;
+            const stepOp = 0.7 / 20;
+            const stepScale = 0.2 / 20;
             const regexScale = /scale\((\d+(\.\d+)?)\)/;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            section.style.left = (left - step)+'px';
+            section.style.left = (left - step) + 'px';
             section.style.opacity = parseFloat(section.style.opacity) + stepOp;
-            section.style.transform = 'scale('+ (scale+stepScale) +')';
+            section.style.transform = 'scale(' + (scale + stepScale) + ')';
 
-            if(left > offsetLeft){
-                setTimeout(slideLeft,10);
-            }else{
+            if (left > offsetLeft) {
+                setTimeout(slideLeft.bind(this), 10);
+            } else {
                 section.style.position = 'static';
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
     }
 
     Switch.prototype.fadeOutSlideLeft = function (section) {
         const offsetLeft = section.offsetLeft;
         const offsetTop = section.offsetTop;
-        const step = offsetLeft/20;
+        const step = offsetLeft / 20;
+        const object = this;
 
         section.style.position = 'absolute';
-        section.style.top = offsetTop+'px';
-        section.style.left = offsetLeft+'px';
+        section.style.top = offsetTop + 'px';
+        section.style.left = offsetLeft + 'px';
         section.style.opacity = '1';
         section.style.transform = 'scale(1)';
+        this.animation = true;
 
 
-        (function slideLeft(){
+        (function slideLeft() {
             const left = parseFloat(section.style.left);
-            const stepOp = 0.7/20;
-            const stepScale = 0.2/20;
+            const stepOp = 0.7 / 20;
+            const stepScale = 0.2 / 20;
             const regexScale = /scale\((\d+(\.\d+)?)\)/;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            section.style.left = (left - step)+'px';
+            section.style.left = (left - step) + 'px';
             section.style.opacity = parseFloat(section.style.opacity) - stepOp;
-            section.style.transform = 'scale('+ (scale-stepScale) +')';
+            section.style.transform = 'scale(' + (scale - stepScale) + ')';
 
-            if(left > 0){
-                setTimeout(slideLeft,10);
-            }else{
+            if (left > 0) {
+                setTimeout(slideLeft.bind(this), 10);
+            } else {
                 section.style.display = 'none';
                 section.style.position = 'static';
                 section.style.transform = 'scale(1)';
                 section.style.opacity = '1';
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
     }
 
     Switch.prototype.fadeInSlideRight = function (section) {
         section.style.display = 'block';
         const offsetLeft = section.offsetLeft;
         const offsetTop = section.offsetTop;
-        const step =  offsetLeft/20;
+        const step = offsetLeft / 20;
+        const object = this;
+        this.animation = true;
 
 
         section.style.position = 'absolute';
-        section.style.top = offsetTop+'px';
+        section.style.top = offsetTop + 'px';
         section.style.left = '0px';
         section.style.opacity = '0.3';
         section.style.transform = 'scale(0.8)';
 
-        (function slideLeft(){
+        (function slideLeft() {
             const left = parseFloat(section.style.left);
-            const stepOp = 0.7/20;
-            const stepScale = 0.2/20;
+            const stepOp = 0.7 / 20;
+            const stepScale = 0.2 / 20;
             const regexScale = /scale\((\d+(\.\d+)?)\)/;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            section.style.left = (left + step)+'px';
+            section.style.left = (left + step) + 'px';
             section.style.opacity = parseFloat(section.style.opacity) + stepOp;
-            section.style.transform = 'scale('+ (scale+stepScale) +')';
+            section.style.transform = 'scale(' + (scale + stepScale) + ')';
 
-            if(left < offsetLeft){
-                setTimeout(slideLeft,10);
-            }else{
+            if (left < offsetLeft) {
+                setTimeout(slideLeft.bind(this), 10);
+            } else {
                 section.style.position = 'static';
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
     }
 
     Switch.prototype.slideToOriginFromLeft = function (section, origin) {
         const length = origin - section.offsetLeft;
         const regexScale = /scale\((\d+(\.\d+)?)\)/;
         const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
-        const stepLeft = (length)/20;
-        const stepOp = (1-section.style.opacity)/20;
-        const stepScale = (1-scale)/20;
-        const intervall = length*10/(section.parentNode.clientWidth/2);
+        const stepLeft = (length) / 20;
+        const stepOp = (1 - section.style.opacity) / 20;
+        const stepScale = (1 - scale) / 20;
+        const intervall = length * 10 / (section.parentNode.clientWidth / 2);
+        const object = this;
+        this.animation = true;
 
-
-        console.log(length + ' left');
         (function slideToOrigin() {
             const left = section.offsetLeft;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            if(section.offsetLeft < origin) {
-                section.style.left = (left + stepLeft)+'px';
+            console.log(stepLeft);
+
+            if (section.offsetLeft < origin && stepLeft > 0.5) {
+                section.style.left = (left + stepLeft) + 'px';
                 section.style.opacity = parseFloat(section.style.opacity) + stepOp;
-                section.style.transform = 'scale('+ (scale+stepScale) +')';
-                setTimeout(slideToOrigin, intervall);
-            }else {
+                section.style.transform = 'scale(' + (scale + stepScale) + ')';
+                setTimeout(slideToOrigin.bind(this), intervall);
+            } else {
                 section.style.position = 'static';
+                section.style.transform = 'scale(1)';
+                section.style.opacity = '1';
+                section.style.left = origin;
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
+        console.log(this.animation);
     }
 
     Switch.prototype.slideToOriginFromRight = function (section, origin) {
-        const length =  section.offsetLeft - origin;
+        const length = section.offsetLeft - origin;
         const regexScale = /scale\((\d+(\.\d+)?)\)/;
         const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
-        const stepLeft = (length)/20;
-        const stepOp = (1-section.style.opacity)/20;
-        const stepScale = (1-scale)/20;
-        const intervall = length*10/(section.parentNode.clientWidth/2);
+        const stepLeft = (length) / 20;
+        const stepOp = (1 - section.style.opacity) / 20;
+        const stepScale = (1 - scale) / 20;
+        const intervall = length * 10 / (section.parentNode.clientWidth / 2);
+        const object = this;
+        this.animation = true;
 
-        console.log(length + ' right');
+
         (function slideToOrigin() {
             const left = section.offsetLeft;
             const scale = parseFloat(regexScale.exec(section.style.transform)[1]);
 
-            if(section.offsetLeft > origin) {
-                section.style.left = (left - stepLeft)+'px';
+            if (section.offsetLeft > origin && stepLeft > 0.5) {
+                section.style.left = (left - stepLeft) + 'px';
                 section.style.opacity = parseFloat(section.style.opacity) + stepOp;
-                section.style.transform = 'scale('+ (scale+stepScale) +')';
-                setTimeout(slideToOrigin, intervall);
-            }else {
+                section.style.transform = 'scale(' + (scale + stepScale) + ')';
+                setTimeout(slideToOrigin.bind(this), intervall);
+            } else {
                 section.style.position = 'static';
+                section.style.transform = 'scale(1)';
+                section.style.opacity = '1';
+                section.style.left = origin;
+                this.animation = false;
             }
-        })();
+        }.bind(object))();
     }
 
     function displayAll(elements) {
@@ -420,21 +446,25 @@ const switcher = new Switch('section-cv');
 
 if ($(window).width() > 1655) {
     switcher.disable();
+    
     $('#CV').removeClass('switcher-container');
 } else {
     $('#CV').addClass('switcher-container');
     switcher.build();
     switcher.enable();
+    
 }
 
 $(window).resize(function () {
     if ($(window).width() > 1655) {
         switcher.disable();
+        
         document.getElementById('CV').classList.remove('switcher-container');
     } else {
         document.getElementById('CV').classList.add('switcher-container');
         switcher.build();
         switcher.enable();
+        
     }
 });
 

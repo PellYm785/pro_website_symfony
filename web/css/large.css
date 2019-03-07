@@ -47,6 +47,7 @@
         width: 100%;
         left: 0px;
         top: 0px;
+        z-index: 9999;
     }
 
     a {
@@ -325,6 +326,15 @@
         padding: 8px;
     }
 
+    #message {
+        height: 500px;
+        width: 100%;
+        overflow: auto;
+        background-color: white;
+        font-family: Arial;
+        outline: none;
+    }
+
     #sendButton {
         width: 15%;
         padding: 8px;
@@ -334,12 +344,6 @@
         margin-right: 20px;
         margin-bottom: 20px;
         cursor: pointer;
-    }
-
-    #message {
-        height: 500px;
-        background-color: white;
-        font-family: Arial;
     }
 
     footer {
